@@ -9,17 +9,20 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use App\Models\Book;
 use OpenApi\Annotations as OA;
 
+
 /**
  * Class Controller,
  * 
- * @author Bintang <adrielle.4220232021@civitas.ukrida.ac.id>
+ * @author Bintang <adrielle.422023021@civitas.ukrida.ac.id>
  */
+
 class BookController extends Controller
 {
+
     /** 
      * @OA\Get(
-     *     path="/api/books",
-     *     tags={"book"},
+     *     path="/api/book",
+     *     tags={"Book"},
      *     summary="Display a listing of the items",
      *     operationId="index",
      *     @OA\Response(
@@ -34,10 +37,12 @@ class BookController extends Controller
         return Book::get();
     }
 
+
+
     /**
      * @OA\Post(
-     *     path="/api/books",
-     *     tags={"book"},
+     *     path="/api/book",
+     *     tags={"Book"},
      *     summary="Store a newly created item",
      *     operationId="store",
      *     @OA\Response(
@@ -60,9 +65,12 @@ class BookController extends Controller
      *                      "description": "Menjadi sehat adalah impian semua orang. Makanan yang selama ini kita pikir sehat ternyata belum tentu 'sehat' bagi tubuh kita.",
      *                      "price": 85000}
      *         ),
-     *     )
+     *     ),
+     *      security={{"passport_token_ready":{}, "passport":{}}}
      * )
      */
+
+
     public function store(Request $request)
     {
         try{
@@ -78,14 +86,15 @@ class BookController extends Controller
             return $book;
 
         } catch(\Exception $exception) {
-            throw new HttpException(400, "Invalid Data : {&exception->getMessage}");
+            throw new HttpException(400, "Invalid Data : {$exception->getMessage()}");
         }
     }
 
+
     /**
      * @OA\Get(
-     *     path="/api/books/{id}",
-     *     tags={"book"},
+     *     path="/api/book/{id}",
+     *     tags={"Book"},
      *     summary="Display the specified item",
      *     operationId="show",
      *     @OA\Response(
@@ -115,6 +124,8 @@ class BookController extends Controller
      *     ),
      * )
      */
+
+
     public function show($id)
     {
         $book = Book::find($id);
@@ -124,10 +135,11 @@ class BookController extends Controller
         return $book;
     }
 
+
     /**
      * @OA\Put(
-     *     path="/api/books/{id}",
-     *     tags={"book"},
+     *     path="/api/book/{id}",
+     *     tags={"Book"},
      *     summary="Update the specified item",
      *     operationId="update",
      *     @OA\Response(
@@ -166,9 +178,11 @@ class BookController extends Controller
      *                      "price": 85000}
      *         ),
      *     ),
+     *      security={{"passport_token_ready":{}, "passport":{}}}
      * )
      */
-    public function update(Request $request, $id)
+
+    public function update(Request $request, string $id)
     {
         $book = Book::find($id);
         if(!$book){
@@ -187,14 +201,14 @@ class BookController extends Controller
            return response()->json(array('message'=>'Updated successfully'), 200);
 
         } catch(\Exception $exception) {
-            throw new HttpException(400, "Invalid Data : {&exception->getMessage(}");
+            throw new HttpException(400, "Invalid Data : {$exception->getMessage()}");
         }
     }
 
     /**
      * @OA\Delete(
-     *     path="/api/books/{id}",
-     *     tags={"book"},
+     *     path="/api/book/{id}",
+     *     tags={"Book"},
      *     summary="Remove the specified item",
      *     operationId="destroy",
      *     @OA\Response(
@@ -222,9 +236,11 @@ class BookController extends Controller
      *             format="int64"
      *         )
      *     ),
+     *      security={{"passport_token_ready":{}, "passport":{}}}
      * )
      */
-    public function destroy($id)
+    
+    public function destroy(string $id)
     {
         $book = Book::find($id);
         if(!$book){
