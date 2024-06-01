@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "My Rest API",
-        "description": "Laravel project to practice developing Rest API with L5 Swagger OpenAPI",
+        "title": "My Figure Hobby",
+        "description": "Anime Merchandise Best Quality",
         "contact": {
             "name": "Adrielle Bintang",
             "email": "adrielle.422023021@civitas.ukrida.ac.id"
@@ -143,10 +143,10 @@
                 ]
             }
         },
-        "/api/book": {
+        "/api/figure": {
             "get": {
                 "tags": [
-                    "Book"
+                    "Figure"
                 ],
                 "summary": "Display a listing of the items",
                 "operationId": "index",
@@ -163,7 +163,7 @@
             },
             "post": {
                 "tags": [
-                    "Book"
+                    "Figure"
                 ],
                 "summary": "Store a newly created item",
                 "operationId": "store",
@@ -173,16 +173,16 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Book"
+                                "$ref": "#/components/schemas/Figure"
                             },
                             "example": {
-                                "title": "Eating Clean",
-                                "author": "Inge Tumiwa-Bachrens",
-                                "publisher": "Kawan Pustaka",
-                                "publication_year": "2016",
-                                "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1482170055i/33511107.jpg",
-                                "description": "Menjadi sehat adalah impian semua orang. Makanan yang selama ini kita pikir sehat ternyata belum tentu 'sehat' bagi tubuh kita.",
-                                "price": 85000
+                                "title": "Hinata",
+                                "series": "Haikyuu",
+                                "manufacturer": "Orange Rouge",
+                                "release_year": "2017",
+                                "category": "figma",
+                                "cover": "https://images.goodsmile.info/cgm/images/product/20170616/6503/45891/large/9e1b7effe4c668ac66d4afb4fcb11f13.jpg",
+                                "price": 500000
                             }
                         }
                     }
@@ -213,10 +213,10 @@
                 ]
             }
         },
-        "/api/book/{id}": {
+        "/api/figure/{id}": {
             "get": {
                 "tags": [
-                    "Book"
+                    "Figure"
                 ],
                 "summary": "Display the specified item",
                 "operationId": "show",
@@ -261,7 +261,7 @@
             },
             "put": {
                 "tags": [
-                    "Book"
+                    "Figure"
                 ],
                 "summary": "Update the specified item",
                 "operationId": "update",
@@ -283,16 +283,16 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Book"
+                                "$ref": "#/components/schemas/Figure"
                             },
                             "example": {
-                                "title": "Eating Clean",
-                                "author": "Inge Tumiwa-Bachrens",
-                                "publisher": "Kawan Pustaka",
-                                "publication_year": "2016",
-                                "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1482170055i/33511107.jpg",
-                                "description": "Menjadi sehat adalah impian semua orang. Makanan yang selama ini kita pikir sehat ternyata belum tentu 'sehat' bagi tubuh kita.",
-                                "price": 85000
+                                "title": "Hinata",
+                                "series": "Haikyuu",
+                                "manufacturer": "Orange Rouge",
+                                "release_year": "2017",
+                                "category": "figma",
+                                "cover": "https://images.goodsmile.info/cgm/images/product/20170616/6503/45891/large/9e1b7effe4c668ac66d4afb4fcb11f13.jpg",
+                                "price": 500000
                             }
                         }
                     }
@@ -332,7 +332,7 @@
             },
             "delete": {
                 "tags": [
-                    "Book"
+                    "Figure"
                 ],
                 "summary": "Remove the specified item",
                 "operationId": "destroy",
@@ -385,15 +385,15 @@
     },
     "components": {
         "schemas": {
-            "Book": {
-                "title": "Book model",
-                "description": "Book model",
+            "Figure": {
+                "title": "Figure model",
+                "description": "Figure model",
                 "required": [
                     "title",
                     "author"
                 ],
                 "xml": {
-                    "name": "Book"
+                    "name": "Figure"
                 }
             },
             "User": {

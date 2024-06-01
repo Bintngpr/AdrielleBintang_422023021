@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use App\Models\Book;
+use App\Models\Figure;
 use OpenApi\Annotations as OA;
 
 
@@ -16,13 +16,13 @@ use OpenApi\Annotations as OA;
  * @author Bintang <adrielle.422023021@civitas.ukrida.ac.id>
  */
 
-class BookController extends Controller
+class FigureController extends Controller
 {
 
     /** 
      * @OA\Get(
-     *     path="/api/book",
-     *     tags={"Book"},
+     *     path="/api/figure",
+     *     tags={"Figure"},
      *     summary="Display a listing of the items",
      *     operationId="index",
      *     @OA\Response(
@@ -34,15 +34,15 @@ class BookController extends Controller
      */
     public function index()
     {
-        return Book::get();
+        return Figure::get();
     }
 
 
 
     /**
      * @OA\Post(
-     *     path="/api/book",
-     *     tags={"Book"},
+     *     path="/api/figure",
+     *     tags={"Figure"},
      *     summary="Store a newly created item",
      *     operationId="store",
      *     @OA\Response(
@@ -59,11 +59,10 @@ class BookController extends Controller
      *         required=true,
      *         description="Request body description",
      *         @OA\JsonContent(
-     *             ref="#/components/schemas/Book",
-     *             example={"title": "Eating Clean", "author": "Inge Tumiwa-Bachrens", "publisher": "Kawan Pustaka", "publication_year": "2016",
-     *                      "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1482170055i/33511107.jpg",
-     *                      "description": "Menjadi sehat adalah impian semua orang. Makanan yang selama ini kita pikir sehat ternyata belum tentu 'sehat' bagi tubuh kita.",
-     *                      "price": 85000}
+     *             ref="#/components/schemas/Figure",
+     *             example={"title": "Hinata", "series": "Haikyuu", "manufacturer": "Orange Rouge", "release_year": "2017", "category": "figma", 
+     *                      "cover": "https://images.goodsmile.info/cgm/images/product/20170616/6503/45891/large/9e1b7effe4c668ac66d4afb4fcb11f13.jpg", 
+     *                      "price": 500000}
      *         ),
      *     ),
      *      security={{"passport_token_ready":{}, "passport":{}}}
@@ -75,15 +74,15 @@ class BookController extends Controller
     {
         try{
             $validator = Validator::make($request->all(), [
-                'title'  => 'required|unique:books',
-                'author'  => 'required|max:100',
+                'title'  => 'required|unique:figures',
+                'manufacturer'  => 'required|max:100',
             ]);
             if ($validator->fails()) {
                 throw new HttpException(400, $validator->messages()->first());
             }
-            $book = new Book;
-            $book->fill($request->all())->save();
-            return $book;
+            $figure = new Figure;
+            $figure->fill($request->all())->save();
+            return $figure;
 
         } catch(\Exception $exception) {
             throw new HttpException(400, "Invalid Data : {$exception->getMessage()}");
@@ -93,8 +92,8 @@ class BookController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/book/{id}",
-     *     tags={"Book"},
+     *     path="/api/figure/{id}",
+     *     tags={"Figure"},
      *     summary="Display the specified item",
      *     operationId="show",
      *     @OA\Response(
@@ -128,18 +127,18 @@ class BookController extends Controller
 
     public function show($id)
     {
-        $book = Book::find($id);
-        if(!$book){
+        $figure = Figure::find($id);
+        if(!$figure){
             throw new HttpException(404, 'Item not found');
         }
-        return $book;
+        return $figure;
     }
 
 
     /**
      * @OA\Put(
-     *     path="/api/book/{id}",
-     *     tags={"Book"},
+     *     path="/api/figure/{id}",
+     *     tags={"Figure"},
      *     summary="Update the specified item",
      *     operationId="update",
      *     @OA\Response(
@@ -171,11 +170,10 @@ class BookController extends Controller
      *         required=true,
      *         description="Request body description",
      *         @OA\JsonContent(
-     *             ref="#/components/schemas/Book",
-     *             example={"title": "Eating Clean", "author": "Inge Tumiwa-Bachrens", "publisher": "Kawan Pustaka", "publication_year": "2016",
-     *                      "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1482170055i/33511107.jpg",
-     *                      "description": "Menjadi sehat adalah impian semua orang. Makanan yang selama ini kita pikir sehat ternyata belum tentu 'sehat' bagi tubuh kita.",
-     *                      "price": 85000}
+     *             ref="#/components/schemas/Figure",
+     *             example={"title": "Hinata", "series": "Haikyuu", "manufacturer": "Orange Rouge", "release_year": "2017", "category": "figma", 
+     *                      "cover": "https://images.goodsmile.info/cgm/images/product/20170616/6503/45891/large/9e1b7effe4c668ac66d4afb4fcb11f13.jpg", 
+     *                      "price": 500000}
      *         ),
      *     ),
      *      security={{"passport_token_ready":{}, "passport":{}}}
@@ -184,20 +182,20 @@ class BookController extends Controller
 
     public function update(Request $request, string $id)
     {
-        $book = Book::find($id);
-        if(!$book){
+        $figure = Figure::find($id);
+        if(!$figure){
             throw new HttpException(404, 'Item not found');
         }
 
         try{
             $validator = Validator::make($request->all(), [
-                'title'  => 'required|unique:books',
-                'author'  => 'required|max:100',
+                'title'  => 'required|unique:figures',
+                'manufacturer'  => 'required|max:100',
             ]);
             if ($validator->fails()) {
                 throw new HttpException(400, $validator->messages()->first());
             }
-           $book->fill($request->all())->save();
+           $figure->fill($request->all())->save();
            return response()->json(array('message'=>'Updated successfully'), 200);
 
         } catch(\Exception $exception) {
@@ -207,8 +205,8 @@ class BookController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/book/{id}",
-     *     tags={"Book"},
+     *     path="/api/figure/{id}",
+     *     tags={"Figure"},
      *     summary="Remove the specified item",
      *     operationId="destroy",
      *     @OA\Response(
@@ -242,13 +240,13 @@ class BookController extends Controller
     
     public function destroy(string $id)
     {
-        $book = Book::find($id);
-        if(!$book){
+        $figure = Figure::find($id);
+        if(!$figure){
             throw new HttpException(404, 'Item not found');
         }
 
         try {
-            $book->delete();
+            $figure->delete();
             return response()->json(array('message'=>'Deleted successfully'), 200);
 
         } catch(\Exception $exception) {
