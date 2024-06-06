@@ -31,7 +31,7 @@ class Figure extends Model
     protected $fillable = [
         'title',
         'series',
-        'manufacturer',
+        'publisher',
         'release_year',
         'category',
         'cover',
