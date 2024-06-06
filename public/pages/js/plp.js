@@ -37,9 +37,9 @@ function getData(toPage=1){
                                         </div>
                                         <div class="product-content">
                                             <h6 class="product-title">
-                                                <a href="/figure/`+item.id+`">`+item.figure_name+`</a>
+                                                <a href="/figure/`+item.id+`">`+item.title+`</a>
                                             </h6>
-                                            <small class="text-color-primary">`+item.producer+`</small>
+                                            <small class="text-color-primary">`+item.series+`</small>
                                             <div class="product-price">
                                                 <span class="new-price">IDR `+parseFloat(item.price).toLocaleString()+`</span>
                                             </div>
