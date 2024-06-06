@@ -1,7 +1,7 @@
 let id_el_list = "#product-list";
 
 function getDataOnEnter(event){
-    if (event.keycode == 13) {
+    if (event.keyCode == 13) {
         getData(1);
     }
 }
@@ -11,45 +11,41 @@ function getData(toPage=1){
         $('[name="_page"]').val(toPage);
     }
     let payload = {
-        '_limit' : 8,
-        '_page' : toPage
+        '_limit': 8,
+        '_page': toPage
     };
     $("._filter").each(function() {
       payload[$(this).attr('name')] = $(this).val();
     });
-
-    axios.get(url,{params:payload},apiHeaders   )
+    
+    axios.get(url,{params:payload},apiHeaders)
     .then(function (response) {
         console.log('[DATA] response..',response.data);
-        let template = '';
-        // START -- products
+        let template = ``;
+        // START-- products
             (response.data.products).forEach((item) => {
-                template += `   <div class="col-lg-3 col-md-4 col-sm-6">    
+                template += `   <div class="col-lg-3 col-md-4 col-sm-6">
                                     <div class="single-product-item text-center">
                                         <div class="products-images">
                                             <a href="/figure/`+item.id+`" class="product-thumbnail">
                                                 <img src="`+item.cover+`" alt="Product Images" height="300">
                                             </a>
-                                            <div class="product-icon">
-                                                <a href="/figure/`+item.id+`">
-                                                    <i class="p-icon icon-plus"></i><span class="tool-tip">Quick View</span>
-                                                </a>
-                                                <a href="#">
-                                                    <i class="p-icon icon-bag2"></i> <span class="tool-tip">Add to cart</span>
-                                                </a>
+                                            <div class="product-actions">
+                                                <a href="/figure/`+item.id+`"><i class="p-icon icon-plus"></i><span class="tool-tip">Quick View</span></a>
+                                                <a href="#"><i class="p-icon icon-bag2"></i> <span class="tool-tip">Add to cart</span></a>
                                             </div>
-                                        </div>  
+                                        </div>
                                         <div class="product-content">
                                             <h6 class="product-title">
-                                            <a href="/figure/`+item.id+`">`+item.title+`</a>
-                                        </h6>
-                                        <small class="text-color-primary">`+item.series+`</small>
-                                        <div class="product-price">
-                                            <span class="new-price">IDR `+parseFloat(item.price).toLocaleString()+`</span>
+                                                <a href="/figure/`+item.id+`">`+item.figure_name+`</a>
+                                            </h6>
+                                            <small class="text-color-primary">`+item.producer+`</small>
+                                            <div class="product-price">
+                                                <span class="new-price">IDR `+parseFloat(item.price).toLocaleString()+`</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>`;
+                                </div>`;
             });
             $(id_el_list).html(template);
         // END---- products
@@ -60,50 +56,50 @@ function getData(toPage=1){
             template = '';
             let max_page = Math.ceil(response.data.products_count_total/response.data.filter._limit);
             if(response.data.filter._page != 1){
-                template +=
+                template += 
                 `<li>
-                    <a class="prev page-numbers" onclick=getData(1)">
+                    <a class="prev page-numbers" onclick="getData(1)">
                         <i class="icon-chevron-left"></i>&nbsp;&nbsp;&nbsp;Min Page
                     </a>
-                </li>`;
+                </li>`; 
             }
             if(response.data.filter._page > 1){
-                template +=
+                template += 
                 `<li>
                     <a class="page-numbers" onclick="getData(`+(response.data.filter._page-1)+`)">
                         `+(response.data.filter._page-1)+`
                     </a>
-                </li>`;
+                </li>`; 
             }
-            template +=
+            template += 
                 `<li>
                     <a class="current text-white page-numbers" onclick="getData(`+response.data.filter._page+`)">
                         `+response.data.filter._page+`
                     </a>
-                </li>`;
+                </li>`; 
             if(response.data.filter._page < max_page){
-                template +=
+                template += 
                 `<li>
                     <a class="page-numbers" onclick="getData(`+(response.data.filter._page+1)+`)">
                         `+(response.data.filter._page+1)+`
                     </a>
-                </li>`
+                </li>`; 
             }
-            if(response.data.filter._page < max_page){
-                template +=
+            if(response.data.filter._page+1 < max_page){
+                template += 
                 `<li>
                     <a class="page-numbers" onclick="getData(`+(response.data.filter._page+2)+`)">
                         `+(response.data.filter._page+2)+`
                     </a>
-                </li>`
+                </li>`;
             }
-            if(response.data.filter._page+1 < max_page){
-                template +=
+            if(response.data.filter._page < max_page){
+                template += 
                 `<li>
                     <a class="next page-numbers" onclick="getData(`+max_page+`)">
-                        Max page<i class="icon-chevron-right"></i>
+                        Max Page<i class="icon-chevron-right"></i>
                     </a>
-                </li>`
+                </li>`; 
             }
             $(id_el_list+'-pagination').html(template);
             $('[name="_page"]').val(response.data.filter._page);
@@ -118,7 +114,7 @@ function getData(toPage=1){
                 icon: "warning",
                 title: "Yaah...",
                 html: "Produk-produk yang Anda cari tidak ditemukan",
-                showConfiguration: false,
+                showConfirmButton: false,
                 timer: 5000
             });
         }else{
@@ -131,8 +127,8 @@ function getData(toPage=1){
             });
         }
     });
-  }
+}
 
-  $(function () {
+$(function () {
     getData();
-  });
+});

@@ -21,7 +21,7 @@ function getData(){
                             <div class="hero-content-wrap">
                                 <div class="hero-text-7 mt-lg-5">
                                     <h6 class="mb-20">
-                                        Latest from AFW
+                                        Latest from WAF
                                     </h6>
                                     <h1>`+breakWord(item.title)+`</h1>
                                     

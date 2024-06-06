@@ -4,10 +4,10 @@
     <div class="site-wrapper-reveal">
         <div class="hero-box-area">
             <div class="container">
-                <div class="row">
+                <div class="row ">
                     <div class="col-lg-12">
                         <!-- Hero Slider Area Start -->
-                        <div class="hero-area" id="product-review">
+                        <div class="hero-area" id="product-preview">
                         </div>
                         <!-- Hero Slider Area End -->
                     </div>
