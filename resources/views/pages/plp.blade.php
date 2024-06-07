@@ -13,7 +13,7 @@
                             <h6 class="mb-20">publishers</h6>
                             <select class="_filter form-select form-select-sm" name="_publisher" onchange="getData()">
                                 <option value="" selected>All</option>
-                                <option value="putnam">Putnam</option>
+                                <option value="haikyuu">Haikyuu</option>
                                 <option value="hariman house">Hariman House</option>
                                 <option value="balai pustaka">Balai Pustaka</option>
                                 <option value="lentera dipantara">Lentera Dipantara</option>
