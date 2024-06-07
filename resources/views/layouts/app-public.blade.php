@@ -4,11 +4,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="description" content="Sportstore">
-        <meta name="keywords" content="ecommerce,book">
-        <meta name="author" content="422023023-kevin">
+        <meta name="description" content="FigureStore">
+        <meta name="keywords" content="ecommerce,Figure">
+        <meta name="author" content="422023021-bintang">
 
-        <title>@yield('title') | 422023023-kevin</title>
+        <title>@yield('title') | 422023023-Bintang</title>
         <link rel="icon" type="image/x-icon" href="{{asset('assets/images/favicon.ico')}}">
         <!-- BEGIN CSS Assets-->
         <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendor/bootstrap.min.css')}}">
