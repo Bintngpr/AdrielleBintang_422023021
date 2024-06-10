@@ -6,7 +6,7 @@ use OpenApi\Annotations as OA;
 /**
  * @OA\Info(
  *      version="1.0",
- *      title="My Figure Hobby",
+ *      title="World Anime Figure",
  *      description="Anime Merchandise Best Quality",
  *      x={
  *          "logo": {
